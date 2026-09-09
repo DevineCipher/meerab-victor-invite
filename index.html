@@ -4,527 +4,779 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Meerab &amp; Victor — The Exchange of Rings</title>
-  <meta name="description" content="You are invited to The Exchange of Rings. Meerab Ilyas Khokhar and Victor John Bhatti, Wednesday, 23rd September 2026, Ramada Plaza Airport, Karachi." />
-  <meta name="theme-color" content="#10241C" />
+  <meta name="description" content="You are invited to The Exchange of Rings. Meerab Ilyas Khokhar and Victor John Bhatti, Wednesday, 23rd September 2026, 7:00 PM. Ramada Plaza Airport, Karachi. Food at 9:00 PM." />
+  <meta name="theme-color" content="#FDFBF7" />
   <meta property="og:title" content="Meerab &amp; Victor — The Exchange of Rings" />
-  <meta property="og:description" content="Engagement Reception · Wednesday, 23rd September 2026 · Ramada Plaza Airport, Karachi" />
+  <meta property="og:description" content="Wednesday, 23rd September 2026 · 7:00 PM · Food at 9:00 PM · Ramada Plaza Airport, Karachi" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://devinecipher.github.io/meerab-victor-invite/images/couple.png" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://devinecipher.github.io/meerab-victor-invite/images/couple.png" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --cream: #f7f1e4;
-      --paper: #fbf6ed;
-      --green: #1c4639;
-      --green-deep: #0e1f18;
-      --gold: #c9a45d;
-      --gold-light: #e3c888;
-      --ink: #16362c;
-      --muted: #4d665c;
+      --ivory: #FDFBF7;
+      --cream: #F4EDE3;
+      --sand: #E8D9C4;
+      --paper: #FFFcf8;
+      --gold: #C6A45B;
+      --gold-light: #DCC48A;
+      --gold-deep: #9A7840;
+      --ink: #3E342C;
+      --muted: #7A6D61;
+      --taupe: #6E5648;
+      --rose: #B08980;
+      --white: #FFFFFF;
+      --shadow: 0 18px 48px rgba(62, 52, 44, 0.1);
+      --font-script: "Great Vibes", cursive;
+      --font-display: "Cormorant Garamond", Georgia, serif;
+      --font-label: "Cinzel", serif;
+      --font-ui: "Montserrat", system-ui, sans-serif;
       --safe-b: env(safe-area-inset-bottom, 0px);
       --safe-t: env(safe-area-inset-top, 0px);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: "Cormorant Garamond", Georgia, serif;
+      font-family: var(--font-ui);
       color: var(--ink);
-      background: var(--green-deep);
-      min-height: 100%;
+      background: linear-gradient(165deg, var(--ivory) 0%, var(--cream) 100%);
+      min-height: 100dvh;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
     body.locked { overflow: hidden; height: 100dvh; }
-    img { max-width: 100%; }
-    button, input, select, textarea { font: inherit; }
+    img { max-width: 100%; display: block; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+    button { cursor: pointer; }
 
-    .grain {
-      pointer-events: none; position: fixed; inset: 0; z-index: 70; opacity: .07;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    .loading {
+      position: fixed; inset: 0; z-index: 120;
+      display: grid; place-items: center;
+      background: var(--ivory);
+      transition: opacity .7s ease, visibility .7s ease;
     }
+    .loading.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .spinner {
+      width: 52px; height: 52px; border-radius: 50%;
+      border: 3px solid var(--cream);
+      border-top-color: var(--gold);
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     .gate {
-      position: fixed; inset: 0; z-index: 80;
+      position: fixed; inset: 0; z-index: 90;
       display: grid; place-items: center;
+      padding: 20px 10px calc(28px + var(--safe-b));
       background:
-        radial-gradient(ellipse at 50% 18%, rgba(227,200,136,.28), transparent 46%),
-        radial-gradient(ellipse at 80% 90%, rgba(28,70,57,.7), transparent 50%),
-        linear-gradient(180deg, #14281f 0%, #0e1f18 100%);
-      padding: 24px 18px;
-      transition: opacity .85s ease, visibility .85s ease;
-    }
-    .gate::before, .gate::after {
-      content: ""; position: absolute; border-radius: 50%; filter: blur(28px);
-      animation: drift 8s ease-in-out infinite;
-    }
-    .gate::before { width: 180px; height: 180px; background: rgba(201,164,93,.22); top: 12%; left: 8%; }
-    .gate::after { width: 140px; height: 140px; background: rgba(201,164,93,.16); bottom: 10%; right: 6%; animation-delay: -3s; }
-    @keyframes drift {
-      0%, 100% { transform: translate(0,0) scale(1); }
-      50% { transform: translate(12px, -18px) scale(1.08); }
+        radial-gradient(ellipse at 50% 18%, rgba(198,164,91,.16), transparent 52%),
+        radial-gradient(ellipse at 80% 88%, rgba(176,137,128,.08), transparent 46%),
+        linear-gradient(165deg, #FDFBF7 0%, #EFE4D4 100%);
+      transition: opacity .9s ease, visibility .9s ease;
     }
     .gate.away { opacity: 0; visibility: hidden; pointer-events: none; }
 
-    .env {
-      width: min(370px, 100%);
+    .env-stage {
+      width: min(600px, 96vw);
       perspective: 1400px;
-      z-index: 2;
-      filter: drop-shadow(0 30px 55px rgba(0,0,0,.5));
+      filter: drop-shadow(0 28px 48px rgba(62, 52, 44, .18));
+      cursor: pointer;
     }
-    .env-pocket {
+    .env {
       position: relative;
+      width: 100%;
+      aspect-ratio: 1.38 / 1;
+      transform-style: preserve-3d;
+    }
+    .env-back {
+      position: absolute; inset: 0;
+      border-radius: 12px;
       background:
-        linear-gradient(180deg, rgba(227,200,136,.18), transparent 28%),
-        repeating-linear-gradient(90deg, rgba(201,164,93,.05) 0 2px, transparent 2px 7px),
-        linear-gradient(180deg, #f3ead6, #e4d4b4);
+        linear-gradient(145deg, #F7ECD9 0%, #EBD7B6 52%, #E0C79A 100%);
+      box-shadow: inset 0 0 0 9px rgba(253, 251, 247, .42), inset 0 0 0 11px var(--gold);
+    }
+    .letter {
+      position: absolute;
+      left: 14%;
+      bottom: 10%;
+      width: 72%;
+      height: 80%;
+      z-index: 2;
+      background: var(--paper);
       border: 1.5px solid var(--gold);
-      box-shadow: inset 0 0 0 6px rgba(251,246,237,.55), inset 0 0 0 7px rgba(201,164,93,.45);
-      min-height: 448px;
-      overflow: hidden;
-    }
-    .env-pocket::before {
-      content: "";
-      position: absolute; left: 0; right: 0; bottom: 0; height: 58%;
-      background: linear-gradient(180deg, #eadfc8, #d7c4a0);
-      clip-path: polygon(0 22%, 50% 0, 100% 22%, 100% 100%, 0 100%);
-      box-shadow: 0 -8px 24px rgba(14,31,24,.12);
-    }
-    .flap {
-      position: absolute; left: 0; right: 0; top: 0; height: 46%;
-      background:
-        linear-gradient(180deg, #f7efe0, #e6d4b3 70%, #dcc8a0);
-      clip-path: polygon(0 0, 100% 0, 50% 100%);
-      transform-origin: top center;
-      z-index: 3;
-      filter: drop-shadow(0 8px 10px rgba(14,31,24,.18));
-      transition: transform 1.05s cubic-bezier(.2,.8,.2,1);
-    }
-    .gate.opening .flap { transform: rotateX(188deg); }
-    .env-copy {
-      position: relative; z-index: 2;
+      border-radius: 6px;
+      padding: 20px 16px 16px;
       text-align: center;
-      padding: 54px 22px 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      box-shadow: 0 8px 18px rgba(62, 52, 44, .1);
+      transform: translateY(12%) scale(.94);
+      transform-origin: center bottom;
     }
-    .env-copy-below {
-      z-index: 4;
-      padding: 10px 22px 22px;
+    .env.open .letter {
+      animation: cardPop 1.05s cubic-bezier(.22, 1.4, .36, 1) .32s forwards;
     }
-    .env-kicker {
-      font-family: Cinzel, serif;
-      font-size: .6rem;
-      letter-spacing: .34em;
-      color: var(--green);
+    @keyframes cardPop {
+      0% { transform: translateY(12%) scale(.94); }
+      62% { transform: translateY(-58%) scale(1.04); }
+      100% { transform: translateY(-52%) scale(1); }
     }
-    .env-to {
-      font-family: "Great Vibes", cursive;
-      font-size: 2.25rem;
-      background: linear-gradient(180deg, #f0d89a, #c9a45d 55%, #8d6a28);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-      margin: 10px 0 6px;
+    .letter .mini-kicker {
+      font-family: var(--font-label);
+      font-size: .55rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
     }
-    .env-from { font-size: 1.08rem; color: var(--green); font-weight: 600; }
-    .env-date {
+    .letter h2 {
+      font-family: var(--font-script);
+      font-size: clamp(1.7rem, 6.4vw, 2.25rem);
+      font-weight: 400;
+      color: var(--taupe);
+      line-height: 1.1;
+      margin: 8px 0 6px;
+    }
+    .letter .mini-names {
+      font-family: var(--font-display);
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .letter .mini-date {
       margin-top: 8px;
-      font-family: Cinzel, serif;
-      font-size: .58rem;
-      letter-spacing: .18em;
+      font-family: var(--font-label);
+      font-size: .55rem;
+      letter-spacing: .12em;
       color: var(--muted);
     }
+    .env-front {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      height: 58%;
+      z-index: 4;
+      background: linear-gradient(180deg, #F3E4C6, #E4CDA0 55%, #D4B57C);
+      clip-path: polygon(0 34%, 50% 0, 100% 34%, 100% 100%, 0 100%);
+      box-shadow: 0 -10px 22px rgba(62, 52, 44, .1);
+    }
+    .env-flap {
+      position: absolute; left: 0; right: 0; top: 0;
+      height: 48%;
+      z-index: 6;
+      background: linear-gradient(180deg, #FBF6EC, #EED9B0 72%, #D4B57C);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: top center;
+      filter: drop-shadow(0 8px 12px rgba(62, 52, 44, .14));
+      transition: transform 1s cubic-bezier(.2, .8, .2, 1), z-index 0s .45s;
+    }
+    .env.open .env-flap {
+      transform: rotateX(188deg);
+      z-index: 1;
+    }
     .seal {
-      position: relative; z-index: 4;
-      width: 102px; height: 102px; margin: 8px auto 0;
+      position: absolute;
+      left: 50%; top: 46%;
+      transform: translate(-50%, -50%);
+      z-index: 8;
+      width: 104px; height: 104px; min-width: 104px; min-height: 104px;
       border: 0; border-radius: 50%;
       background:
-        radial-gradient(circle at 32% 28%, #f3dd9a, #c9a45d 38%, #8a5f18 78%, #5c3d0c);
-      color: var(--green-deep);
-      cursor: pointer;
+        radial-gradient(circle at 32% 28%, #F3DDA0, #C6A45B 42%, #8A5F18 82%);
+      color: var(--taupe);
       box-shadow:
-        0 0 0 6px rgba(201,164,93,.22),
-        0 14px 28px rgba(0,0,0,.32),
-        inset 0 0 0 5px rgba(255,236,190,.28);
+        0 0 0 7px rgba(198, 164, 91, .22),
+        0 12px 24px rgba(62, 52, 44, .24),
+        inset 0 0 0 5px rgba(255, 236, 190, .28);
       display: grid; place-items: center;
-      animation: pulse 2.6s ease-in-out infinite;
+      animation: sealPulse 2.6s ease-in-out infinite;
+      transition: opacity .35s ease, transform .35s ease;
     }
-    .seal svg { width: 54px; height: 32px; }
     .seal span {
-      font-family: Cinzel, serif;
-      font-size: .62rem;
-      letter-spacing: .16em;
+      font-family: var(--font-label);
+      font-size: .68rem;
+      letter-spacing: .14em;
       font-weight: 700;
-    }
-    .env-hint {
-      position: relative; z-index: 4;
-      margin-top: 14px;
-      font-family: Cinzel, serif;
-      font-size: .56rem;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--green);
       text-align: center;
     }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 0 6px rgba(201,164,93,.18), 0 14px 28px rgba(0,0,0,.32), inset 0 0 0 5px rgba(255,236,190,.28); }
-      50% { transform: scale(1.045); box-shadow: 0 0 0 11px rgba(201,164,93,.08), 0 16px 32px rgba(0,0,0,.34), inset 0 0 0 5px rgba(255,236,190,.4); }
+    .seal svg { width: 50px; height: 28px; display: block; margin: 0 auto 2px; }
+    .env.open .seal {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(.78);
+      pointer-events: none;
+      animation: none;
+    }
+    @keyframes sealPulse {
+      0%, 100% { box-shadow: 0 0 0 7px rgba(198,164,91,.2), 0 12px 24px rgba(62,52,44,.24), inset 0 0 0 5px rgba(255,236,190,.28); }
+      50% { box-shadow: 0 0 0 14px rgba(198,164,91,.08), 0 14px 28px rgba(62,52,44,.28), inset 0 0 0 5px rgba(255,236,190,.4); }
+    }
+    .tap-hint {
+      margin-top: 28px;
+      text-align: center;
+      font-family: var(--font-label);
+      font-size: .72rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      animation: hintPulse 2s ease-in-out infinite;
+    }
+    @keyframes hintPulse {
+      0%, 100% { opacity: .55; transform: translateY(0); }
+      50% { opacity: 1; transform: translateY(-5px); }
     }
 
-    .petals { position: fixed; inset: 0; pointer-events: none; z-index: 90; overflow: hidden; }
+    .petals { position: fixed; inset: 0; pointer-events: none; z-index: 95; overflow: hidden; }
     .petal {
-      position: absolute; top: -24px; width: 9px; height: 14px;
-      background: linear-gradient(135deg, #f0d89a, #c9a45d);
+      position: absolute; top: -24px; width: 10px; height: 16px;
+      background: linear-gradient(135deg, #E3C888, #B08980);
       border-radius: 0 70% 0 70%; opacity: 0;
     }
-    .petals.go .petal { animation: fall 3.4s linear forwards; }
+    .petals.go .petal { animation: fall 3.5s linear forwards; }
     @keyframes fall {
       0% { opacity: 0; transform: translateY(0) rotate(0); }
-      10% { opacity: .9; }
-      100% { opacity: 0; transform: translateY(110dvh) rotate(240deg); }
+      12% { opacity: .85; }
+      100% { opacity: 0; transform: translateY(110dvh) rotate(260deg); }
     }
 
-    .topbar {
-      position: sticky; top: 0; z-index: 20;
-      display: none;
-      align-items: center; justify-content: space-between;
-      padding: calc(10px + var(--safe-t)) 16px 10px;
-      background: rgba(14, 31, 24, .82);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(201,164,93,.28);
-      color: var(--cream);
+    .music {
+      position: fixed; top: calc(14px + var(--safe-t)); right: 16px;
+      width: 50px; height: 50px; min-width: 50px; min-height: 50px;
+      border-radius: 50%; z-index: 40;
+      display: none; place-items: center;
+      background: var(--white);
+      border: 2px solid var(--gold);
+      color: var(--taupe);
+      box-shadow: 0 8px 22px rgba(62, 52, 44, .1);
     }
-    body.revealed .topbar { display: flex; }
-    .topbar strong { font-family: "Great Vibes", cursive; font-size: 1.5rem; font-weight: 400; color: var(--gold-light); }
-    .mini-count { font-family: Cinzel, serif; font-size: .6rem; letter-spacing: .14em; color: #ead9b0; }
-    .music-fab {
-      width: 40px; height: 40px; border-radius: 50%;
-      border: 1px solid var(--gold);
-      background: rgba(201,164,93,.12); color: var(--gold-light); cursor: pointer;
+    body.revealed .music { display: grid; }
+    .music.playing { animation: musicPulse 2s ease-in-out infinite; color: var(--gold-deep); }
+    @keyframes musicPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(198,164,91,.35); }
+      50% { box-shadow: 0 0 0 12px rgba(198,164,91,0); }
     }
 
-    .app { display: none; padding-bottom: calc(90px + var(--safe-b)); }
-    body.revealed .app { display: block; animation: riseIn .7s ease; }
-    @keyframes riseIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    .app { display: none; padding-bottom: calc(96px + var(--safe-b)); }
+    body.revealed .app { display: block; animation: riseIn .85s ease; }
+    @keyframes riseIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 
+    .floaters { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .floater {
+      position: absolute;
+      background: linear-gradient(135deg, var(--gold-light), var(--rose));
+      border-radius: 150% 0 150% 0;
+      opacity: .28;
+      animation: drift 16s infinite ease-in-out;
+    }
+    @keyframes drift {
+      0% { transform: translate(0, -8vh) rotate(0) scale(1); opacity: 0; }
+      12% { opacity: .4; }
+      88% { opacity: .35; }
+      100% { transform: translate(80px, 110vh) rotate(640deg) scale(.8); opacity: 0; }
+    }
+
+    section { position: relative; z-index: 1; }
     .hero {
-      position: relative;
-      min-height: 84dvh;
-      color: #fff;
-      overflow: hidden;
-    }
-    .hero img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center 18%;
-      animation: ken 18s ease-in-out infinite alternate;
-    }
-    @keyframes ken {
-      from { transform: scale(1.04); }
-      to { transform: scale(1.12); }
-    }
-    .hero::after {
-      content: "";
-      position: absolute; inset: 0;
-      background:
-        linear-gradient(180deg, rgba(14,31,24,.2) 0%, rgba(14,31,24,.08) 38%, rgba(14,31,24,.92) 100%),
-        radial-gradient(ellipse at 50% 80%, rgba(201,164,93,.18), transparent 46%);
-    }
-    .hero-copy {
-      position: relative; z-index: 1;
-      min-height: 84dvh;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 28px 22px 34px;
+      min-height: 92dvh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
       text-align: center;
+      padding: calc(72px + var(--safe-t)) 20px 40px;
+      background: radial-gradient(ellipse at center, rgba(198,164,91,.12) 0%, transparent 70%);
     }
-    .hero-copy .kicker {
-      font-family: Cinzel, serif; font-size: .64rem; letter-spacing: .32em; color: var(--gold-light);
+    .photo {
+      width: min(268px, 70vw); aspect-ratio: 1;
+      border-radius: 50%; overflow: hidden;
+      border: 5px solid var(--white);
+      box-shadow: 0 16px 40px rgba(62, 52, 44, .14);
+      position: relative;
+      margin-bottom: 22px;
     }
-    .hero-copy h1 {
-      font-family: "Great Vibes", cursive;
-      font-size: clamp(2.7rem, 12vw, 3.55rem);
-      line-height: 1.04; margin: 8px 0 8px;
-      background: linear-gradient(180deg, #fff4d4, #e3c888 60%, #c9a45d);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-      filter: drop-shadow(0 8px 18px rgba(0,0,0,.35));
+    .photo::after {
+      content: "";
+      position: absolute; inset: -7px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
     }
-    .hero-copy .names { font-size: 1.18rem; font-weight: 600; color: #f3ead6; }
-    .hero-copy .when {
-      margin-top: 8px;
-      font-family: Cinzel, serif;
-      font-size: .62rem;
+    .photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 18%; }
+
+    .rings { width: 78px; height: 46px; margin: 4px auto 10px; }
+    .kicker {
+      font-family: var(--font-label);
+      font-size: .68rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+    }
+    .names {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 10vw, 3.8rem);
+      font-weight: 500;
+      line-height: 1.05;
+      color: var(--taupe);
+      margin: 6px 0 8px;
+    }
+    .names em {
+      font-family: var(--font-script);
+      font-style: normal;
+      color: var(--gold-deep);
+      font-size: .78em;
+    }
+    .hero-date {
+      font-family: var(--font-label);
+      font-size: .72rem;
       letter-spacing: .16em;
-      color: var(--gold-light);
+      color: var(--muted);
     }
+    .hero-time {
+      margin-top: 6px;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--taupe);
+    }
+
     .count {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
-      margin: 22px auto 0; max-width: 360px;
+      display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+      margin-top: 28px;
     }
     .count div {
-      border: 1px solid rgba(227,200,136,.5);
-      background: linear-gradient(180deg, rgba(201,164,93,.16), rgba(14,31,24,.38));
-      padding: 12px 4px 10px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.18);
+      min-width: 74px;
+      background: var(--white);
+      border: 1px solid rgba(198,164,91,.35);
+      border-radius: 12px;
+      padding: 14px 10px 12px;
+      box-shadow: var(--shadow);
     }
     .count strong {
-      display: block; font-size: 1.45rem; color: var(--gold-light);
+      display: block;
+      font-family: var(--font-display);
+      font-size: 2rem;
+      line-height: 1;
+      color: var(--taupe);
       font-variant-numeric: tabular-nums;
     }
-    .count span { font-family: Cinzel, serif; font-size: .5rem; letter-spacing: .16em; color: #ead9b0; }
-
-    .wrap { width: min(430px, 100%); margin: 0 auto; padding: 0 12px; }
-    .section { padding: 30px 0 10px; }
-    .sec-label {
-      font-family: Cinzel, serif; font-size: .62rem; letter-spacing: .3em;
-      color: var(--gold); text-align: center; margin-bottom: 16px;
+    .count span {
+      display: block;
+      margin-top: 4px;
+      font-size: .62rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
 
-    .frame-gold { background: linear-gradient(180deg, #f0d89a, #c9a45d 50%, #a07d36); padding: 1.6px; box-shadow: 0 22px 40px rgba(0,0,0,.28); }
-    .frame-green { background: var(--green); padding: 2.2px; }
-    .frame-inner { background: linear-gradient(180deg, #e3c888, #c9a45d); padding: 1px; }
-    .card {
-      position: relative; background:
-        radial-gradient(ellipse at 50% 0%, rgba(227,200,136,.18), transparent 46%),
+    .wrap { width: min(680px, 100%); margin: 0 auto; padding: 0 16px; }
+    .panel {
+      background: var(--white);
+      border-radius: 22px;
+      padding: 34px 22px;
+      margin: 12px 0 28px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(198,164,91,.22);
+    }
+    .ornament { text-align: center; color: var(--gold); font-size: 1.4rem; margin-bottom: 8px; }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 6vw, 2.7rem);
+      font-style: italic;
+      text-align: center;
+      color: var(--taupe);
+    }
+    .rule {
+      width: 92px; height: 2px; margin: 12px auto 24px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .invite-card {
+      position: relative;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(220,196,138,.2), transparent 48%),
         var(--paper);
-      overflow: hidden; padding: 30px 20px 26px;
+      padding: 36px 20px 28px;
+      text-align: center;
+      overflow: hidden;
     }
-    .card::before {
-      content: ""; position: absolute; inset: 11px;
-      border: 1px solid rgba(201,164,93,.4); pointer-events: none;
+    .foil { background: linear-gradient(180deg, #F0D89A, #C6A45B 50%, #A07D36); padding: 2px; box-shadow: 0 22px 44px rgba(62,52,44,.12); }
+    .foil-inner { background: var(--ivory); padding: 3px; }
+    .foil-gold { background: linear-gradient(180deg, #E3C888, #C6A45B); padding: 1px; }
+    .invite-card::before {
+      content: ""; position: absolute; inset: 12px;
+      border: 1px solid rgba(198,164,91,.4); pointer-events: none;
     }
-    .corner { position: absolute; width: 70px; height: 70px; z-index: 2; pointer-events: none; }
-    .corner svg { width: 100%; height: 100%; }
+    .corner { position: absolute; width: 64px; height: 64px; z-index: 2; pointer-events: none; }
     .tl { top: 8px; left: 8px; }
     .tr { top: 8px; right: 8px; transform: scaleX(-1); }
     .bl { bottom: 8px; left: 8px; transform: scaleY(-1); }
     .br { bottom: 8px; right: 8px; transform: scale(-1); }
-    .invite { position: relative; z-index: 1; text-align: center; }
-    .kicker {
-      font-family: Cinzel, serif; font-size: .66rem; letter-spacing: .28em;
-      color: var(--green); font-weight: 600;
-    }
-    .rings { margin: 12px auto 4px; width: 78px; height: 46px; }
+    .invite { position: relative; z-index: 1; }
     .script {
-      font-family: "Great Vibes", cursive;
-      font-size: clamp(2.15rem, 8.8vw, 2.7rem);
-      line-height: 1.15; margin: 4px 0 12px;
-      background: linear-gradient(180deg, #e8c97a, #c9a45d 55%, #9a742c);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
+      font-family: var(--font-script);
+      font-size: clamp(2.1rem, 8vw, 2.7rem);
+      color: var(--gold-deep);
+      line-height: 1.15;
+      margin: 4px 0 12px;
     }
     .honour {
-      font-style: italic; font-size: 1.02rem; line-height: 1.5; color: var(--green);
-      max-width: 30ch; margin: 0 auto 16px;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.12rem;
+      color: var(--ink);
+      max-width: 32ch;
+      margin: 0 auto 16px;
     }
-    .name { font-size: 1.4rem; font-weight: 700; color: var(--green); letter-spacing: .01em; }
-    .parents { margin-top: 4px; font-size: .72rem; letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }
-    .parents em { font-style: normal; text-transform: none; letter-spacing: .02em; font-size: .9rem; font-weight: 600; color: var(--ink); }
-    .amp { display: block; font-family: "Great Vibes", cursive; font-size: 1.9rem; color: var(--gold); margin: 6px 0 4px; }
-    .diamond { width: 7px; height: 7px; margin: 16px auto 12px; background: var(--green); transform: rotate(45deg); }
-    .card-meta { margin: 0 auto 4px; max-width: 280px; }
-    .card-meta p { margin: 8px 0; }
-    .card-meta .label { display: block; font-family: Cinzel, serif; font-size: .6rem; letter-spacing: .26em; color: var(--green); }
-    .card-meta .value { font-size: 1.05rem; font-weight: 600; }
-    .card-meta .sub { display: block; font-size: .86rem; font-style: italic; color: var(--muted); }
-    .blessing { font-style: italic; color: var(--green); margin-top: 14px; }
+    .person { font-family: var(--font-display); font-size: 1.45rem; font-weight: 700; color: var(--taupe); }
+    .parents {
+      margin-top: 4px;
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .parents em { font-style: normal; text-transform: none; letter-spacing: .02em; font-size: .95rem; font-weight: 600; color: var(--ink); }
+    .amp {
+      display: block;
+      font-family: var(--font-script);
+      font-size: 1.9rem;
+      color: var(--gold);
+      margin: 6px 0 4px;
+    }
+    .diamond {
+      width: 7px; height: 7px; margin: 16px auto 12px;
+      background: var(--gold); transform: rotate(45deg);
+    }
+    .meta { margin: 0 auto; max-width: 300px; }
+    .meta p { margin: 10px 0; }
+    .meta .label {
+      display: block;
+      font-family: var(--font-label);
+      font-size: .58rem;
+      letter-spacing: .24em;
+      color: var(--gold-deep);
+    }
+    .meta .value { font-family: var(--font-display); font-size: 1.12rem; font-weight: 600; }
+    .meta .sub { display: block; font-size: .88rem; font-style: italic; color: var(--muted); }
+    .blessing {
+      font-family: var(--font-display);
+      font-style: italic;
+      color: var(--taupe);
+      margin-top: 16px;
+    }
 
-    .actions { display: grid; gap: 10px; }
     .tile {
-      width: 100%; text-align: left; cursor: pointer;
-      border: 1px solid rgba(201,164,93,.45);
-      background:
-        linear-gradient(90deg, rgba(201,164,93,.14), transparent 18%),
-        var(--paper);
-      color: inherit;
-      padding: 14px 14px 14px 16px;
-      display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center;
-      min-height: 74px;
-      transition: transform .18s ease, border-color .18s ease;
+      width: 100%; min-height: 88px;
+      text-align: left;
+      background: linear-gradient(135deg, var(--ivory), var(--white));
+      border: 2px solid var(--cream);
+      border-radius: 16px;
+      padding: 18px 18px 18px 22px;
+      margin-bottom: 14px;
+      display: grid;
+      grid-template-columns: 44px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
     }
-    .tile:hover, .tile:focus-visible { outline: none; border-color: var(--gold); transform: translateY(-1px); }
-    .tile .label { font-family: Cinzel, serif; font-size: .62rem; letter-spacing: .22em; color: var(--green); }
-    .tile .value { display: block; font-size: 1.12rem; font-weight: 700; margin-top: 3px; }
-    .tile .sub { display: block; font-size: .88rem; font-style: italic; color: var(--muted); }
-    .tile .go { font-family: Cinzel, serif; font-size: .52rem; letter-spacing: .14em; color: var(--gold); text-transform: uppercase; }
+    .tile::before {
+      content: "";
+      position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+      background: linear-gradient(180deg, var(--gold), var(--rose));
+    }
+    .tile:hover, .tile:focus-visible {
+      outline: none;
+      transform: translateY(-3px);
+      border-color: var(--gold);
+      box-shadow: 0 12px 28px rgba(62, 52, 44, .1);
+    }
+    .tile .ico { color: var(--gold-deep); display: grid; place-items: center; }
+    .tile .label {
+      font-family: var(--font-label);
+      font-size: .58rem;
+      letter-spacing: .2em;
+      color: var(--taupe);
+    }
+    .tile .value { display: block; font-family: var(--font-display); font-size: 1.18rem; font-weight: 700; }
+    .tile .sub { display: block; font-size: .86rem; color: var(--muted); }
+    .tile .go {
+      font-size: .62rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+      font-weight: 600;
+    }
 
     .map-wrap {
-      margin-top: 12px; overflow: hidden; height: 198px;
+      margin-top: 8px; overflow: hidden; height: 210px;
+      border-radius: 14px;
       border: 1px solid var(--gold);
-      box-shadow: 0 12px 28px rgba(0,0,0,.18);
+      box-shadow: 0 12px 28px rgba(62, 52, 44, .08);
     }
     .map-wrap iframe { width: 100%; height: 100%; border: 0; }
 
-    .note-card {
-      background: linear-gradient(180deg, #fffaf1, var(--paper));
-      border: 1px solid rgba(201,164,93,.45);
-      padding: 20px 16px; text-align: center;
+    .story {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.22rem;
+      text-align: center;
+      color: var(--ink);
+      line-height: 1.75;
+      padding: 8px 8px 28px;
     }
-    .note-card h3 { font-family: Cinzel, serif; font-size: .68rem; letter-spacing: .2em; color: var(--green); margin-bottom: 8px; }
-    .note-card p { font-size: 1.05rem; }
 
     .rsvp-card {
       background:
-        radial-gradient(ellipse at 50% 0%, rgba(227,200,136,.2), transparent 50%),
+        radial-gradient(ellipse at 50% 0%, rgba(220,196,138,.2), transparent 50%),
         var(--paper);
       border: 1px solid var(--gold);
-      padding: 22px 16px 16px;
-      box-shadow: 0 18px 36px rgba(0,0,0,.16);
+      border-radius: 18px;
+      padding: 24px 16px 18px;
+      box-shadow: var(--shadow);
     }
-    .rsvp-card h3 { text-align: center; font-family: "Great Vibes", cursive; font-size: 2.15rem; color: var(--gold); font-weight: 400; }
+    .rsvp-card h3 {
+      font-family: var(--font-script);
+      font-size: 2.2rem;
+      font-weight: 400;
+      text-align: center;
+      color: var(--gold-deep);
+    }
+    .rsvp-lead { text-align: center; color: var(--muted); margin: 4px 0 8px; font-size: .92rem; }
     .field { margin-top: 12px; }
-    .field label { display: block; font-family: Cinzel, serif; font-size: .58rem; letter-spacing: .16em; color: var(--green); margin-bottom: 6px; }
+    .field label {
+      display: block;
+      font-family: var(--font-label);
+      font-size: .58rem;
+      letter-spacing: .16em;
+      color: var(--taupe);
+      margin-bottom: 6px;
+    }
     .field input, .field select, .field textarea {
-      width: 100%; min-height: 44px; padding: 10px 12px;
-      border: 1px solid rgba(201,164,93,.5); background: #fffef9; color: var(--ink);
+      width: 100%; min-height: 46px; padding: 12px 14px;
+      border: 2px solid var(--cream); background: #fffef9;
+      border-radius: 10px;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      outline: none; border-color: var(--gold);
     }
     .field textarea { min-height: 88px; resize: vertical; }
     .choice { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .choice label {
-      min-height: 46px; display: grid; place-items: center; cursor: pointer;
-      border: 1px solid rgba(201,164,93,.5); background: #fffef9;
-      font-family: Cinzel, serif; font-size: .6rem; letter-spacing: .1em;
+      min-height: 48px; display: grid; place-items: center; cursor: pointer;
+      border: 2px solid var(--cream); background: #fffef9; border-radius: 12px;
+      font-family: var(--font-label); font-size: .58rem; letter-spacing: .08em; color: var(--ink);
     }
-    .choice input { display: none; }
-    .choice label:has(input:checked) { background: var(--green); color: var(--cream); border-color: var(--green); }
+    .choice input { position: absolute; opacity: 0; pointer-events: none; }
+    .choice label:has(input:checked) {
+      background: linear-gradient(180deg, #E3C888, #C6A45B);
+      color: var(--taupe); border-color: var(--gold);
+    }
     .submit {
-      margin-top: 16px; width: 100%; min-height: 50px; border: 0; cursor: pointer;
-      background: linear-gradient(180deg, #e3c888, #c9a45d 48%, #a9843a);
-      color: #1a2f28;
-      font-family: Cinzel, serif; letter-spacing: .16em; text-transform: uppercase; font-size: .68rem;
-      box-shadow: 0 10px 20px rgba(169,132,58,.28);
+      margin-top: 16px; width: 100%; min-height: 50px; border: 0; border-radius: 999px;
+      background: linear-gradient(180deg, #E3C888, #C6A45B 48%, #A9843A);
+      color: var(--taupe);
+      font-family: var(--font-label);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-size: .68rem;
+      font-weight: 700;
     }
+
     .thanks { text-align: center; padding: 18px 8px; display: none; }
     .thanks.show { display: block; }
+    .thanks h3 { font-family: var(--font-script); font-size: 2rem; color: var(--gold-deep); font-weight: 400; }
     .thanks p { margin-top: 8px; font-style: italic; }
+
+    footer {
+      text-align: center;
+      padding: 28px 20px 12px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+    footer .hearts { color: var(--gold); font-size: 1.3rem; margin-bottom: 8px; }
+    footer .credit { margin-top: 14px; font-size: .68rem; letter-spacing: .04em; opacity: .8; }
 
     .dock {
       position: fixed; left: 50%; bottom: 0; transform: translateX(-50%);
-      width: min(430px, 100%); z-index: 25;
-      display: none; grid-template-columns: 1fr 1fr; gap: 8px;
-      padding: 10px 12px calc(10px + var(--safe-b));
-      background: linear-gradient(180deg, transparent, rgba(14,31,24,.97) 32%);
+      width: min(680px, 100%); z-index: 30;
+      display: none; grid-template-columns: 1fr 1fr; gap: 10px;
+      padding: 12px 16px calc(12px + var(--safe-b));
+      background: linear-gradient(180deg, transparent, rgba(253,251,247,.96) 28%);
     }
     body.revealed .dock { display: grid; }
     .btn {
-      min-height: 48px; border: 0; cursor: pointer;
-      font-family: Cinzel, serif; font-size: .66rem; letter-spacing: .14em; text-transform: uppercase;
+      min-height: 48px; border-radius: 999px;
+      font-family: var(--font-ui); font-size: .82rem; font-weight: 600;
+      display: grid; place-items: center; text-decoration: none;
     }
-    .btn-green { background: var(--green); color: var(--cream); }
-    .btn-gold { background: linear-gradient(180deg, #e3c888, #c9a45d 50%, #a9843a); color: #1a2f28; }
+    .btn-share {
+      background: var(--white);
+      color: var(--taupe);
+      border: 1.5px solid var(--gold);
+    }
+    .btn-gold {
+      border: 0;
+      background: linear-gradient(180deg, #E3C888, #C6A45B 50%, #A9843A);
+      color: var(--taupe);
+    }
 
     .backdrop {
-      position: fixed; inset: 0; background: rgba(8,18,14,.55);
-      display: none; z-index: 40; align-items: flex-end; justify-content: center;
+      position: fixed; inset: 0; z-index: 50;
+      background: rgba(62, 52, 44, .48);
+      display: none; align-items: flex-end; justify-content: center;
+      padding: 16px;
     }
     .backdrop.open { display: flex; }
     .sheet {
-      width: min(430px, 100%); background: var(--paper); border-top: 2px solid var(--gold);
-      padding: 10px 20px calc(22px + var(--safe-b));
+      width: min(450px, 100%);
+      background: var(--white);
+      border-radius: 22px 22px 16px 16px;
+      padding: 12px 22px calc(22px + var(--safe-b));
+      max-height: 90dvh; overflow-y: auto;
     }
-    .grab { width: 42px; height: 4px; border-radius: 99px; background: rgba(31,74,60,.18); margin: 4px auto 14px; }
-    .sheet h2 { font-family: Cinzel, serif; font-size: .72rem; letter-spacing: .22em; color: var(--green); text-align: center; }
-    .sheet .lead { text-align: center; margin: 8px 0 6px; font-size: 1.15rem; font-weight: 600; }
+    .grab { width: 42px; height: 4px; border-radius: 99px; background: rgba(62,52,44,.16); margin: 4px auto 14px; }
+    .sheet h2 {
+      font-family: var(--font-display);
+      font-size: 1.9rem;
+      text-align: center;
+      color: var(--taupe);
+    }
+    .sheet .lead { text-align: center; margin: 6px 0 4px; font-size: 1.12rem; font-weight: 600; }
     .sheet .note { text-align: center; color: var(--muted); font-style: italic; margin-bottom: 16px; }
     .sheet-actions { display: grid; gap: 8px; }
     .sheet-actions a, .sheet-actions button {
-      text-decoration: none; min-height: 46px; border: 1px solid rgba(201,164,93,.5);
-      background: #fff; color: var(--green); font-weight: 600;
-      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      text-decoration: none; min-height: 48px; border: 2px solid var(--cream);
+      background: var(--ivory); color: var(--taupe); font-weight: 600;
+      display: flex; align-items: center; justify-content: center; border-radius: 999px;
     }
     .close-sheet {
       margin-top: 10px; width: 100%; background: transparent; border: 0; color: var(--muted);
-      font-family: Cinzel, serif; letter-spacing: .16em; font-size: .62rem; text-transform: uppercase;
-      min-height: 36px; cursor: pointer;
+      font-family: var(--font-label); letter-spacing: .16em; font-size: .62rem; text-transform: uppercase;
+      min-height: 44px;
     }
+    .menu { list-style: none; text-align: left; color: var(--muted); line-height: 2; padding: 8px 6px 0; }
+    .menu li { display: flex; gap: 10px; align-items: flex-start; }
+    .menu b { color: var(--gold-deep); }
+
     .toast {
-      position: fixed; left: 50%; bottom: calc(84px + var(--safe-b));
+      position: fixed; left: 50%; bottom: calc(88px + var(--safe-b));
       transform: translateX(-50%) translateY(12px);
-      background: var(--green); color: var(--cream); padding: 10px 16px;
-      opacity: 0; pointer-events: none; z-index: 50; transition: .25s ease;
+      background: var(--taupe); color: var(--ivory);
+      padding: 10px 16px; border-radius: 999px;
+      opacity: 0; pointer-events: none; z-index: 60; transition: .25s ease;
+      font-size: .86rem;
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+    @media (max-width: 420px) {
+      .count div { min-width: 64px; padding: 12px 6px 10px; }
+      .count strong { font-size: 1.7rem; }
+      .photo { width: min(220px, 72vw); }
+      .panel { padding: 28px 16px; }
+      .tile { grid-template-columns: 36px 1fr; }
+      .tile .go { grid-column: 2; }
+      .env-stage { width: min(560px, 96vw); }
+      .seal { width: 92px; height: 92px; min-width: 92px; min-height: 92px; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .seal, .hero img, .gate::before, .gate::after { animation: none; }
-      .flap { transition: none; }
+      .spinner, .seal, .tap-hint, .music.playing, .floater, .petal, .photo img { animation: none; }
+      .env-flap, .letter { transition: none; animation: none; }
+      .env.open .letter { transform: translateY(-52%) scale(1); }
+      .app { animation: none; }
     }
   </style>
 </head>
 <body class="locked">
-  <div class="grain" aria-hidden="true"></div>
+  <div class="loading" id="loading" aria-hidden="true"><div class="spinner"></div></div>
+
   <div class="gate" id="gate">
-    <div class="env">
-      <div class="env-pocket">
-        <div class="flap"></div>
-        <div class="env-copy">
-          <p class="env-kicker">Together with their families</p>
-        </div>
-        <button class="seal" id="openSeal" type="button" aria-label="Open the invitation">
-          <span>
-            <svg viewBox="0 0 78 46" aria-hidden="true"><circle cx="32" cy="23" r="15.5" fill="none" stroke="#1c4639" stroke-width="2.4"/><circle cx="46" cy="23" r="15.5" fill="none" stroke="#1c4639" stroke-width="2.4"/></svg><br />M &amp; V
-          </span>
-        </button>
-        <div class="env-copy env-copy-below">
-          <p class="env-to" id="envTo">You are invited</p>
-          <p class="env-from">Meerab &amp; Victor</p>
-          <p class="env-date">Wednesday, 23rd September 2026</p>
-          <p class="env-hint">Tap the seal to open</p>
+    <div>
+      <div class="env-stage" id="envStage">
+        <div class="env" id="envelope">
+          <div class="env-back"></div>
+          <article class="letter" aria-hidden="true">
+            <p class="mini-kicker">Together with their families</p>
+            <h2>You're Invited</h2>
+            <p class="mini-names">Meerab &amp; Victor</p>
+            <p class="mini-date">23 September 2026 · 7:00 PM</p>
+          </article>
+          <div class="env-front"></div>
+          <div class="env-flap"></div>
+          <button class="seal" id="openSeal" type="button" aria-label="Open the invitation">
+            <span>
+              <svg viewBox="0 0 78 46" aria-hidden="true"><circle cx="32" cy="23" r="15.5" fill="none" stroke="#6E5648" stroke-width="2.4"/><circle cx="46" cy="23" r="15.5" fill="none" stroke="#6E5648" stroke-width="2.4"/></svg>
+              M &amp; V
+            </span>
+          </button>
         </div>
       </div>
+      <p class="tap-hint" id="envTo">Tap the envelope to open</p>
     </div>
   </div>
+
   <div class="petals" id="petals" aria-hidden="true"></div>
+  <div class="floaters" id="floaters" aria-hidden="true"></div>
 
-  <header class="topbar">
-    <strong>M &amp; V</strong>
-    <span class="mini-count" id="miniCount">23 Sep 2026</span>
-    <button class="music-fab" id="musicBtn" type="button" aria-label="Toggle music">♪</button>
-  </header>
+  <button class="music" id="musicBtn" type="button" aria-label="Toggle music" title="Toggle music">
+    <svg id="musicIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+  </button>
 
-  <div class="app">
+  <audio id="bgMusic" loop preload="none" playsinline>
+    <source src="audio/romantic-piano.mp3" type="audio/mpeg" />
+  </audio>
+
+  <main class="app" id="app">
     <section class="hero">
-      <img src="images/couple.png" alt="Meerab Ilyas Khokhar and Victor John Bhatti" />
-      <div class="hero-copy">
-        <p class="kicker">The Exchange of Rings</p>
-        <h1>Meerab &amp; Victor</h1>
-        <p class="names">A celebration of two families becoming one</p>
-        <p class="when">Wednesday, 23rd September 2026 · Karachi</p>
-        <div class="count" aria-label="Countdown to Wednesday, 23rd September 2026 in Karachi">
-          <div><strong id="cdD">00</strong><span>Days</span></div>
-          <div><strong id="cdH">00</strong><span>Hours</span></div>
-          <div><strong id="cdM">00</strong><span>Mins</span></div>
-          <div><strong id="cdS">00</strong><span>Secs</span></div>
-        </div>
+      <div class="photo">
+        <img src="images/couple.png" alt="Meerab Ilyas Khokhar and Victor John Bhatti" />
+      </div>
+      <p class="kicker">Together with their families</p>
+      <svg class="rings" viewBox="0 0 78 46" aria-hidden="true">
+        <circle cx="32" cy="23" r="15.5" fill="none" stroke="#C6A45B" stroke-width="2.2"/>
+        <circle cx="46" cy="23" r="15.5" fill="none" stroke="#6E5648" stroke-width="2.2"/>
+      </svg>
+      <h1 class="names">Meerab <em>&amp;</em> Victor</h1>
+      <p class="hero-date">Wednesday, 23rd September 2026</p>
+      <p class="hero-time">The Exchange of Rings · 7:00 PM</p>
+      <div class="count" aria-label="Countdown to 7:00 PM Pakistan time on 23 September 2026">
+        <div><strong id="cdD">00</strong><span>Days</span></div>
+        <div><strong id="cdH">00</strong><span>Hours</span></div>
+        <div><strong id="cdM">00</strong><span>Mins</span></div>
+        <div><strong id="cdS">00</strong><span>Secs</span></div>
       </div>
     </section>
 
     <div class="wrap">
-      <section class="section" id="invite">
-        <p class="sec-label">The invitation</p>
-        <div class="frame-gold">
-          <div class="frame-green">
-            <div class="frame-inner">
-              <article class="card">
-                <span class="corner tl" aria-hidden="true"><svg viewBox="0 0 80 80" fill="none"><path d="M8 58c2-22 18-38 40-42" stroke="#C4A35A" stroke-width="1.2"/><path d="M14 62c4-26 22-42 48-44" stroke="#1F4A3C" stroke-width="0.8"/><path d="M20 18c8 2 12 8 12 14M20 18c-2 7 2 13 8 16" stroke="#C4A35A" stroke-width="1"/><circle cx="20" cy="18" r="1.6" fill="#C4A35A"/></svg></span>
-                <span class="corner tr" aria-hidden="true"><svg viewBox="0 0 80 80" fill="none"><path d="M8 58c2-22 18-38 40-42" stroke="#C4A35A" stroke-width="1.2"/><path d="M14 62c4-26 22-42 48-44" stroke="#1F4A3C" stroke-width="0.8"/><path d="M20 18c8 2 12 8 12 14M20 18c-2 7 2 13 8 16" stroke="#C4A35A" stroke-width="1"/><circle cx="20" cy="18" r="1.6" fill="#C4A35A"/></svg></span>
-                <span class="corner bl" aria-hidden="true"><svg viewBox="0 0 80 80" fill="none"><path d="M8 58c2-22 18-38 40-42" stroke="#C4A35A" stroke-width="1.2"/><path d="M14 62c4-26 22-42 48-44" stroke="#1F4A3C" stroke-width="0.8"/><path d="M20 18c8 2 12 8 12 14M20 18c-2 7 2 13 8 16" stroke="#C4A35A" stroke-width="1"/><circle cx="20" cy="18" r="1.6" fill="#C4A35A"/></svg></span>
-                <span class="corner br" aria-hidden="true"><svg viewBox="0 0 80 80" fill="none"><path d="M8 58c2-22 18-38 40-42" stroke="#C4A35A" stroke-width="1.2"/><path d="M14 62c4-26 22-42 48-44" stroke="#1F4A3C" stroke-width="0.8"/><path d="M20 18c8 2 12 8 12 14M20 18c-2 7 2 13 8 16" stroke="#C4A35A" stroke-width="1"/><circle cx="20" cy="18" r="1.6" fill="#C4A35A"/></svg></span>
+      <section id="invite">
+        <p class="ornament">❖</p>
+        <h2 class="section-title">The Invitation</h2>
+        <div class="rule"></div>
+        <div class="foil">
+          <div class="foil-inner">
+            <div class="foil-gold">
+              <article class="invite-card">
+                <span class="corner tl" aria-hidden="true"><svg viewBox="0 0 80 80" fill="none"><path d="M8 58c2-22 18-38 40-42" stroke="#C6A45B" stroke-width="1.2"/><path d="M14 62c4-26 22-42 48-44" stroke="#B08980" stroke-width="0.8"/><path d="M20 18c8 2 12 8 12 14M20 18c-2 7 2 13 8 16" stroke="#C6A45B" stroke-width="1"/><circle cx="20" cy="18" r="1.6" fill="#C6A45B"/></svg></span>
+                <span class="corner tr" aria-hidden="true"><svg viewBox="0 0 80 80" fill="none"><path d="M8 58c2-22 18-38 40-42" stroke="#C6A45B" stroke-width="1.2"/><path d="M14 62c4-26 22-42 48-44" stroke="#B08980" stroke-width="0.8"/><path d="M20 18c8 2 12 8 12 14M20 18c-2 7 2 13 8 16" stroke="#C6A45B" stroke-width="1"/><circle cx="20" cy="18" r="1.6" fill="#C6A45B"/></svg></span>
+                <span class="corner bl" aria-hidden="true"><svg viewBox="0 0 80 80" fill="none"><path d="M8 58c2-22 18-38 40-42" stroke="#C6A45B" stroke-width="1.2"/><path d="M14 62c4-26 22-42 48-44" stroke="#B08980" stroke-width="0.8"/><path d="M20 18c8 2 12 8 12 14M20 18c-2 7 2 13 8 16" stroke="#C6A45B" stroke-width="1"/><circle cx="20" cy="18" r="1.6" fill="#C6A45B"/></svg></span>
+                <span class="corner br" aria-hidden="true"><svg viewBox="0 0 80 80" fill="none"><path d="M8 58c2-22 18-38 40-42" stroke="#C6A45B" stroke-width="1.2"/><path d="M14 62c4-26 22-42 48-44" stroke="#B08980" stroke-width="0.8"/><path d="M20 18c8 2 12 8 12 14M20 18c-2 7 2 13 8 16" stroke="#C6A45B" stroke-width="1"/><circle cx="20" cy="18" r="1.6" fill="#C6A45B"/></svg></span>
                 <div class="invite">
                   <p class="kicker">Together with their families</p>
                   <svg class="rings" viewBox="0 0 78 46" aria-hidden="true">
-                    <circle cx="32" cy="23" r="15.5" fill="none" stroke="#C4A35A" stroke-width="2.2"/>
-                    <circle cx="46" cy="23" r="15.5" fill="none" stroke="#1F4A3C" stroke-width="2.2"/>
+                    <circle cx="32" cy="23" r="15.5" fill="none" stroke="#C6A45B" stroke-width="2.2"/>
+                    <circle cx="46" cy="23" r="15.5" fill="none" stroke="#6E5648" stroke-width="2.2"/>
                   </svg>
-                  <h2 class="script">The Exchange of Rings</h2>
+                  <h3 class="script">The Exchange of Rings</h3>
                   <p class="honour">request the honour of your presence as their children begin this beautiful journey together</p>
-                  <p class="name">Meerab Ilyas Khokhar</p>
+                  <p class="person">Meerab Ilyas Khokhar</p>
                   <p class="parents">Daughter of <em>Ilyas Khokhar &amp; Miyka Rose Ilyas</em></p>
                   <span class="amp">&amp;</span>
-                  <p class="name">Victor John Bhatti</p>
+                  <p class="person">Victor John Bhatti</p>
                   <p class="parents">Son of <em>Safdar John Bhatti &amp; Mabel Safdar</em></p>
                   <div class="diamond"></div>
-                  <div class="card-meta">
-                    <p><span class="label">Date</span><span class="value">Wednesday, 23rd September 2026</span></p>
-                    <p><span class="label">Venue</span><span class="value">Ramada Plaza Airport</span><span class="sub">Engagement Reception · Karachi</span></p>
-                    <p><span class="label">Dinner</span><span class="value">Food Buffet</span></p>
+                  <div class="meta">
+                    <p><span class="label">Date</span><span class="value">Wednesday, 23rd September 2026</span><span class="sub">Event starts at 7:00 PM</span></p>
+                    <p><span class="label">Venue</span><span class="value">Ramada Plaza Airport</span><span class="sub">Engagement Reception · Star Avenue, Karachi</span></p>
+                    <p><span class="label">Dinner</span><span class="value">Food Buffet</span><span class="sub">Served at 9:00 PM</span></p>
                   </div>
                   <p class="blessing">With love and blessings of both families</p>
                 </div>
@@ -534,50 +786,61 @@
         </div>
       </section>
 
-      <section class="section" id="when">
-        <p class="sec-label">When &amp; where</p>
-        <div class="actions">
-          <button class="tile" type="button" data-sheet="date">
-            <span>
-              <span class="label">Date</span>
-              <span class="value">Wednesday, 23rd September 2026</span>
-            </span>
-            <span class="go">Add to calendar</span>
-          </button>
-          <button class="tile" type="button" data-sheet="venue">
-            <span>
-              <span class="label">Venue</span>
-              <span class="value">Ramada Plaza Airport</span>
-              <span class="sub">Engagement Reception · Star Avenue, Karachi</span>
-            </span>
-            <span class="go">Open maps</span>
-          </button>
-          <button class="tile" type="button" data-sheet="dinner">
-            <span>
-              <span class="label">Dinner</span>
-              <span class="value">Food Buffet</span>
-              <span class="sub">Served at the reception</span>
-            </span>
-            <span class="go">View details</span>
-          </button>
-        </div>
+      <section class="panel" id="when">
+        <p class="ornament">❖</p>
+        <h2 class="section-title">Event Details</h2>
+        <div class="rule"></div>
+
+        <button class="tile" type="button" data-sheet="date">
+          <span class="ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+          <span>
+            <span class="label">Date</span>
+            <span class="value">Wednesday, 23rd September 2026</span>
+            <span class="sub">Event starts at 7:00 PM · Karachi</span>
+          </span>
+          <span class="go">Add to calendar</span>
+        </button>
+
+        <button class="tile" type="button" data-sheet="venue">
+          <span class="ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg></span>
+          <span>
+            <span class="label">Venue</span>
+            <span class="value">Ramada Plaza Airport</span>
+            <span class="sub">Engagement Reception · Star Avenue, Karachi</span>
+          </span>
+          <span class="go">Open maps</span>
+        </button>
+
+        <button class="tile" type="button" data-sheet="dinner">
+          <span class="ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 3v8a2 2 0 0 0 2 2h1V3M9 3v10M14 3c2 2.2 3 4.4 3 7v3h-3V3M4 21h16"/></svg></span>
+          <span>
+            <span class="label">Dinner</span>
+            <span class="value">Food Buffet</span>
+            <span class="sub">Served at 9:00 PM</span>
+          </span>
+          <span class="go">View details</span>
+        </button>
+
         <div class="map-wrap">
-          <iframe title="Ramada Plaza Airport on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Ramada%20Plaza%20by%20Wyndham%20Karachi%20Airport%20Hotel&z=15&output=embed"></iframe>
+          <iframe title="Ramada Plaza by Wyndham Karachi Airport Hotel on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Ramada%20Plaza%20by%20Wyndham%20Karachi%20Airport%20Hotel&z=15&output=embed"></iframe>
         </div>
       </section>
 
-      <section class="section">
-        <div class="note-card">
-          <h3>An evening of joy</h3>
-          <p>Join us as two families become one. A food buffet will be served at the engagement reception.</p>
-        </div>
+      <section>
+        <p class="ornament">❖</p>
+        <h2 class="section-title">Our Story</h2>
+        <div class="rule"></div>
+        <p class="story">Together with their families, Meerab Ilyas Khokhar and Victor John Bhatti request the honour of your presence as they begin this beautiful journey together. Your love and blessings mean the world to us as we exchange rings and commit to a lifetime of love and happiness.</p>
       </section>
 
-      <section class="section" id="rsvp">
-        <p class="sec-label">Kindly reply</p>
+      <section id="rsvp">
+        <p class="ornament">❖</p>
+        <h2 class="section-title">RSVP</h2>
+        <div class="rule"></div>
         <div class="rsvp-card">
           <form id="rsvpForm">
             <h3>Will you celebrate with us?</h3>
+            <p class="rsvp-lead">Wednesday, 23rd September 2026 · 7:00 PM · Food at 9:00 PM</p>
             <div class="field">
               <label for="guestName">Your name</label>
               <input id="guestName" name="name" required autocomplete="name" placeholder="Full name" />
@@ -604,7 +867,7 @@
               <label for="note">A wish for the couple</label>
               <textarea id="note" name="note" placeholder="With love from our family…"></textarea>
             </div>
-            <button class="submit" type="submit">Send RSVP</button>
+            <button class="submit" type="submit">Send RSVP on WhatsApp</button>
           </form>
           <div class="thanks" id="rsvpThanks">
             <h3>Thank you</h3>
@@ -613,11 +876,18 @@
         </div>
       </section>
     </div>
-  </div>
+
+    <footer>
+      <div class="hearts">♥ ❖ ♥</div>
+      <p>With love and blessings of both families</p>
+      <p style="margin-top:8px;font-size:.85rem;">Meerab Ilyas Khokhar &amp; Victor John Bhatti</p>
+      <p class="credit">Music: Gymnopédie No. 1 · Kevin MacLeod (incompetech.com) · CC BY</p>
+    </footer>
+  </main>
 
   <div class="dock">
-    <button class="btn btn-green" id="shareBtn" type="button">Share</button>
-    <a class="btn btn-gold" href="#rsvp" style="display:grid;place-items:center;text-decoration:none;">RSVP</a>
+    <button class="btn btn-share" id="shareBtn" type="button">Share invite</button>
+    <a class="btn btn-gold" href="#rsvp">RSVP now</a>
   </div>
 
   <div class="backdrop" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
@@ -627,6 +897,7 @@
       <p class="lead" id="sheetLead"></p>
       <p class="note" id="sheetNote"></p>
       <div class="sheet-actions" id="sheetActions"></div>
+      <div id="sheetExtra"></div>
       <button class="close-sheet" type="button" id="closeSheet">Close</button>
     </div>
   </div>
@@ -637,36 +908,72 @@
       rsvpPhone: "",
       dateLabel: "Wednesday, 23rd September 2026",
       mapsQuery: "Ramada Plaza by Wyndham Karachi Airport Hotel, Star Avenue, Karachi",
-      eventAt: "2026-09-23T00:00:00+05:00",
+      eventAt: "2026-09-23T19:00:00+05:00",
       googleCal: "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" +
         encodeURIComponent("The Exchange of Rings — Meerab & Victor") +
-        "&dates=20260923/20260924&details=" +
-        encodeURIComponent("Engagement Reception with Food Buffet at Ramada Plaza Airport, Karachi. Wednesday, 23rd September 2026.") +
-        "&location=" + encodeURIComponent("Ramada Plaza by Wyndham Karachi Airport Hotel, Star Avenue, Karachi") +
-        "&ctz=Asia/Karachi"
+        "&dates=20260923T190000/20260923T230000&ctz=Asia/Karachi&details=" +
+        encodeURIComponent("Engagement Reception of Meerab Ilyas Khokhar and Victor John Bhatti.\n\nEvent starts at 7:00 PM.\nFood at 9:00 PM.\n\nVenue: Ramada Plaza Airport, Engagement Reception, Star Avenue, Karachi (Ramada Plaza by Wyndham Karachi Airport Hotel).\nDinner: Food Buffet.") +
+        "&location=" + encodeURIComponent("Ramada Plaza by Wyndham Karachi Airport Hotel, Star Avenue, Karachi")
     };
 
     const guest = new URLSearchParams(location.search).get("to");
-    if (guest) document.getElementById("envTo").textContent = guest.trim();
+    const hint = document.getElementById("envTo");
+    if (guest) hint.textContent = guest.trim() + " — tap the envelope to open";
 
     const mapsGoogle = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(CONFIG.mapsQuery);
     const mapsApple = "https://maps.apple.com/?q=" + encodeURIComponent(CONFIG.mapsQuery);
     const mapsDir = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(CONFIG.mapsQuery);
 
+    const icsBody = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//Meerab and Victor//Engagement Invitation//EN",
+      "CALSCALE:GREGORIAN",
+      "METHOD:PUBLISH",
+      "BEGIN:VTIMEZONE",
+      "TZID:Asia/Karachi",
+      "BEGIN:STANDARD",
+      "TZOFFSETFROM:+0500",
+      "TZOFFSETTO:+0500",
+      "TZNAME:PKT",
+      "DTSTART:19700101T000000",
+      "END:STANDARD",
+      "END:VTIMEZONE",
+      "BEGIN:VEVENT",
+      "UID:meerab-victor-exchange-of-rings-20260923@invite",
+      "DTSTAMP:20260909T000000Z",
+      "DTSTART;TZID=Asia/Karachi:20260923T190000",
+      "DTEND;TZID=Asia/Karachi:20260923T230000",
+      "SUMMARY:The Exchange of Rings - Meerab and Victor",
+      "LOCATION:Ramada Plaza by Wyndham Karachi Airport Hotel, Star Avenue, Karachi",
+      "DESCRIPTION:Engagement Reception of Meerab Ilyas Khokhar and Victor John Bhatti on Wednesday\\, 23rd September 2026.\\nEvent starts at 7:00 PM.\\nFood at 9:00 PM.\\nVenue: Ramada Plaza Airport\\, Karachi.\\nDinner: Food Buffet.",
+      "END:VEVENT",
+      "END:VCALENDAR"
+    ].join("\r\n");
+
+    function downloadIcs() {
+      const blob = new Blob([icsBody], { type: "text/calendar;charset=utf-8" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "Meerab-Victor-Engagement.ics";
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
     const sheets = {
       date: {
-        title: "Date",
+        title: "Save the Date",
         lead: CONFIG.dateLabel,
-        note: "All-day engagement reception in Karachi. Save it to your calendar.",
+        note: "Event starts at 7:00 PM · Food at 9:00 PM · Asia/Karachi",
         actions: [
-          { href: CONFIG.googleCal, label: "Add to Google Calendar" },
-          { href: "event.ics", label: "Add to iPhone / Outlook", download: "Meerab-Victor-Engagement.ics" }
+          { href: CONFIG.googleCal, label: "Google Calendar" },
+          { href: "event.ics", label: "Apple / Outlook (.ics)", download: "Meerab-Victor-Engagement.ics" }
         ]
       },
       venue: {
         title: "Venue",
         lead: "Ramada Plaza Airport",
-        note: "Engagement Reception · Star Avenue, Karachi",
+        note: "Engagement Reception · Star Avenue, Karachi · Ramada Plaza by Wyndham Karachi Airport Hotel",
         actions: [
           { href: mapsGoogle, label: "Open in Google Maps" },
           { href: mapsApple, label: "Open in Apple Maps" },
@@ -674,10 +981,11 @@
         ]
       },
       dinner: {
-        title: "Dinner",
-        lead: "Food Buffet",
-        note: "A food buffet will be served during the engagement reception. Come hungry, and celebrate with both families.",
-        actions: [{ href: mapsGoogle, label: "See the venue" }]
+        title: "Dinner & Reception",
+        lead: "Food Buffet · 9:00 PM",
+        note: "Join us for an evening of celebration. The ceremony begins at 7:00 PM, and a food buffet is served at 9:00 PM.",
+        extra: "<ul class='menu'><li><b>✓</b> Traditional Pakistani cuisine</li><li><b>✓</b> International dishes</li><li><b>✓</b> Vegetarian options</li><li><b>✓</b> Dessert bar</li><li><b>✓</b> Beverages &amp; refreshments</li></ul>",
+        actions: []
       }
     };
 
@@ -693,6 +1001,7 @@
       document.getElementById("sheetTitle").textContent = data.title;
       document.getElementById("sheetLead").textContent = data.lead;
       document.getElementById("sheetNote").textContent = data.note;
+      document.getElementById("sheetExtra").innerHTML = data.extra || "";
       const actions = document.getElementById("sheetActions");
       actions.innerHTML = "";
       data.actions.forEach((action) => {
@@ -701,7 +1010,13 @@
         a.textContent = action.label;
         a.target = "_blank";
         a.rel = "noopener";
-        if (action.download) a.setAttribute("download", action.download);
+        if (action.download) {
+          a.setAttribute("download", action.download);
+          a.addEventListener("click", (e) => {
+            e.preventDefault();
+            downloadIcs();
+          });
+        }
         actions.appendChild(a);
       });
       sheetEl.classList.add("open");
@@ -724,83 +1039,140 @@
       document.getElementById("cdH").textContent = pad(h);
       document.getElementById("cdM").textContent = pad(m);
       document.getElementById("cdS").textContent = pad(s);
-      document.getElementById("miniCount").textContent = d === 0 ? "Today in Karachi" : d + " days to go";
     }
     tick();
     setInterval(tick, 1000);
 
-    let audioCtx, master, musicOn = false, timer;
-    const melody = [64, 67, 71, 67, 64, 62, 60, 67, 69, 71, 72, 71, 69, 67];
-    function note(freq, time, dur) {
-      const o = audioCtx.createOscillator();
-      const g = audioCtx.createGain();
-      o.type = "triangle";
-      o.frequency.value = freq;
-      g.gain.setValueAtTime(0, time);
-      g.gain.linearRampToValueAtTime(0.045, time + 0.03);
-      g.gain.exponentialRampToValueAtTime(0.0008, time + dur);
-      o.connect(g); g.connect(master);
-      o.start(time); o.stop(time + dur + 0.05);
-    }
+    const bgMusic = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+    const iconPlay = '<svg id="musicIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>';
+    const iconPause = '<svg id="musicIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+    let musicOn = false;
+    bgMusic.volume = 0.34;
+
     function startMusic() {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (audioCtx.state === "suspended") audioCtx.resume();
-      if (timer) clearInterval(timer);
-      master = audioCtx.createGain();
-      master.gain.value = 0.7;
-      master.connect(audioCtx.destination);
-      const beat = 0.55;
-      const playLoop = () => {
-        const t0 = audioCtx.currentTime + 0.05;
-        melody.forEach((midi, i) => {
-          note(440 * Math.pow(2, (midi - 69) / 12), t0 + i * beat, 0.7);
-        });
-      };
-      playLoop();
-      timer = setInterval(playLoop, melody.length * beat * 1000);
-      musicOn = true;
-      document.getElementById("musicBtn").textContent = "♪";
+      bgMusic.volume = 0.34;
+      const play = bgMusic.play();
+      if (play && play.then) {
+        play.then(() => {
+          musicOn = true;
+          musicBtn.classList.add("playing");
+          musicBtn.innerHTML = iconPause;
+        }).catch(() => {});
+      }
     }
     function stopMusic() {
-      if (timer) clearInterval(timer);
-      if (audioCtx && audioCtx.state === "running") audioCtx.suspend();
+      bgMusic.pause();
       musicOn = false;
-      document.getElementById("musicBtn").textContent = "×";
+      musicBtn.classList.remove("playing");
+      musicBtn.innerHTML = iconPlay;
     }
-    document.getElementById("musicBtn").addEventListener("click", () => {
+    musicBtn.addEventListener("click", () => {
       if (musicOn) stopMusic(); else startMusic();
     });
+
+    const floaters = document.getElementById("floaters");
+    for (let i = 0; i < 12; i++) {
+      const p = document.createElement("i");
+      p.className = "floater";
+      p.style.left = Math.random() * 100 + "vw";
+      p.style.width = (10 + Math.random() * 16) + "px";
+      p.style.height = (10 + Math.random() * 16) + "px";
+      p.style.animationDuration = (12 + Math.random() * 10) + "s";
+      p.style.animationDelay = (Math.random() * 8) + "s";
+      floaters.appendChild(p);
+    }
 
     const petals = document.getElementById("petals");
     for (let i = 0; i < 18; i++) {
       const p = document.createElement("i");
       p.className = "petal";
       p.style.left = Math.random() * 100 + "%";
-      p.style.animationDelay = (Math.random() * 1.5) + "s";
-      p.style.animationDuration = (2.6 + Math.random() * 1.5) + "s";
+      p.style.animationDelay = (Math.random() * 1.4) + "s";
+      p.style.animationDuration = (2.6 + Math.random() * 1.4) + "s";
       petals.appendChild(p);
     }
+
+    function burst() {
+      const canvas = document.createElement("canvas");
+      canvas.setAttribute("aria-hidden", "true");
+      canvas.style.cssText = "position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:100";
+      document.body.appendChild(canvas);
+      const ctx = canvas.getContext("2d");
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      canvas.width = innerWidth * dpr; canvas.height = innerHeight * dpr;
+      ctx.scale(dpr, dpr);
+      const colors = ["#C6A45B", "#6E5648", "#B08980", "#FDFBF7", "#DCC48A"];
+      const bits = Array.from({ length: 90 }, () => ({
+        x: innerWidth / 2, y: innerHeight * 0.42,
+        vx: (Math.random() - 0.5) * 14,
+        vy: Math.random() * -11 - 3,
+        s: 4 + Math.random() * 5,
+        c: colors[Math.floor(Math.random() * colors.length)],
+        r: Math.random() * 360
+      }));
+      let frames = 0;
+      function draw() {
+        ctx.clearRect(0, 0, innerWidth, innerHeight);
+        bits.forEach((b) => {
+          b.vy += 0.22; b.x += b.vx; b.y += b.vy; b.r += 6;
+          ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(b.r * Math.PI / 180);
+          ctx.fillStyle = b.c; ctx.fillRect(-b.s / 2, -b.s / 2, b.s, b.s * 0.6);
+          ctx.restore();
+        });
+        frames += 1;
+        if (frames < 90) requestAnimationFrame(draw);
+        else canvas.remove();
+      }
+      draw();
+    }
+
     function reveal() {
       document.body.classList.add("revealed");
       document.body.classList.remove("locked");
       document.getElementById("gate").classList.add("away");
     }
     function openInvite() {
-      document.getElementById("gate").classList.add("opening");
+      const env = document.getElementById("envelope");
+      if (env.classList.contains("open")) return;
+      env.classList.add("open");
       petals.classList.add("go");
-      try { startMusic(); } catch (e) {}
-      setTimeout(reveal, 950);
+      startMusic();
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      setTimeout(() => {
+        reveal();
+        if (!reduce) burst();
+      }, reduce ? 120 : 1680);
     }
-    document.getElementById("openSeal").addEventListener("click", openInvite);
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || new URLSearchParams(location.search).has("open")) {
-      reveal();
-    }
+    document.getElementById("openSeal").addEventListener("click", (e) => {
+      e.stopPropagation();
+      openInvite();
+    });
+    document.getElementById("envStage").addEventListener("click", openInvite);
+
+    window.addEventListener("load", () => {
+      const params = new URLSearchParams(location.search);
+      const skipMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches || params.has("open");
+      if (params.has("peek") || skipMotion) {
+        document.getElementById("loading").classList.add("hidden");
+      } else {
+        setTimeout(() => document.getElementById("loading").classList.add("hidden"), 500);
+      }
+      if (params.has("peek")) {
+        document.getElementById("envelope").classList.add("open");
+      } else if (skipMotion) {
+        document.getElementById("envelope").classList.add("open");
+        reveal();
+      }
+    });
 
     function inviteText() {
       return [
         "You're invited to The Exchange of Rings",
         "Meerab Ilyas Khokhar & Victor John Bhatti",
         CONFIG.dateLabel,
+        "Event starts at 7:00 PM",
+        "Food at 9:00 PM",
         "Ramada Plaza Airport, Karachi — Engagement Reception",
         "",
         "Open the invite:",
@@ -821,6 +1193,7 @@
     });
 
     const form = document.getElementById("rsvpForm");
+    if (guest) form.name.value = guest.trim();
     form.querySelectorAll('input[name="attending"]').forEach((radio) => {
       radio.addEventListener("change", () => {
         const yes = form.attending.value === "yes";
@@ -840,6 +1213,7 @@
             "Assalamualaikum / Hello,",
             "",
             "I would be delighted to attend The Exchange of Rings for Meerab & Victor on " + CONFIG.dateLabel + ".",
+            "Event starts at 7:00 PM. Food at 9:00 PM.",
             "Name: " + name,
             "Guests: " + count,
             diet ? "Dietary: " + diet : "",
@@ -850,7 +1224,7 @@
         : [
             "Assalamualaikum / Hello,",
             "",
-            "Thank you for the invitation to The Exchange of Rings on " + CONFIG.dateLabel + ". I am sorry that I will not be able to attend.",
+            "Thank you for the invitation to The Exchange of Rings on " + CONFIG.dateLabel + " at 7:00 PM. I am sorry that I will not be able to attend.",
             "Name: " + name,
             wish ? "Wish: " + wish : "",
             "",
@@ -859,6 +1233,7 @@
       const message = lines.filter(Boolean).join("\n");
       form.style.display = "none";
       document.getElementById("rsvpThanks").classList.add("show");
+      if (attending) burst();
       if (CONFIG.rsvpPhone) {
         window.open("https://wa.me/" + CONFIG.rsvpPhone.replace(/[^\d]/g, "") + "?text=" + encodeURIComponent(message), "_blank", "noopener");
       } else {
