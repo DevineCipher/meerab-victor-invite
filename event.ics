@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Meerab and Victor//Engagement Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:meerab-victor-exchange-of-rings-20260923@invite
+DTSTAMP:20260909T000000Z
+DTSTART;VALUE=DATE:20260923
+DTEND;VALUE=DATE:20260924
+SUMMARY:The Exchange of Rings - Meerab and Victor
+LOCATION:Ramada Plaza by Wyndham Karachi Airport Hotel, Star Avenue, Karachi
+DESCRIPTION:Engagement Reception of Meerab Ilyas Khokhar and Victor John Bhatti on Wednesday, 23rd September 2026. Venue: Ramada Plaza Airport, Karachi. Dinner: Food Buffet.
+END:VEVENT
+END:VCALENDAR
